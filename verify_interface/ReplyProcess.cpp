@@ -25,6 +25,7 @@ void PlatON_OffChain::ReplyProcess::TaskLooping()
 	auto msg2process = _msgQueue.pop();
 
 	//添加处理消息的业务逻辑
+	//msg2process是个std::shared_ptr<json::value>结构
 	std::cout << utility::conversions::to_utf8string(msg2process->serialize()) << std::endl;
 }
 
