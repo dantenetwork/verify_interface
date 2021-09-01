@@ -9,14 +9,15 @@ int main()
 	//cpprestTest();
 	//testJson();
 
-	RestServer rs(U("http://127.0.0.1:7890/"));
+	//RestServer rs(U("http://192.168.1.85:7890/"));
+	//PlatON_OffChain::ReplyProcess::GetInftance().Start();
 	
 	while (true)
 	{
 		testSync();
 
 		//std::this_thread::sleep_for(2000ms);
-		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(15000));
 	}
 
 	return 0;

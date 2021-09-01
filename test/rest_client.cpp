@@ -67,14 +67,29 @@ void testJson()
 
 int testSync()
 {
-	http_client client(U("http://127.0.0.1:7890/"));
-	uri_builder builder(U("/Dante"));
+	http_client client(U("http://192.168.1.65:10240/"));
+	//uri_builder builder(U("/v1/verify/fill_deal"));
+	http_request reqMsg;
 	
+	//set header
+	http_headers& myHeader = reqMsg.headers();
+	myHeader.add(U("Ocp-Apim-Subscription-Key"), U("1217773e5a82410f98ee70aa1700f599"));
+
+	//set method
+	reqMsg.set_method(methods::POST);
+
+	//set path
+	reqMsg.set_request_uri(U("/v1/verify/fill_deal"));
+
+	//set body
 	json::value jv;
 	jv[U("id")] = json::value::number(7777);
 	jv[U("content")] = json::value::string(U("Hello Dante."));
 
-	auto responseTask = client.request(methods::POST, builder.to_string(), jv);
+	reqMsg.set_body(jv);
+
+	//auto responseTask = client.request(methods::POST, builder.to_string(), jv);
+	auto responseTask = client.request(reqMsg);
 
 	try {
 		std::cout << responseTask.get().status_code() << std::endl;

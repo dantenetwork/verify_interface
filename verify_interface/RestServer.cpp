@@ -10,8 +10,15 @@ RestServer::RestServer(utility::string_t url): _restListener(url)
 	_restListener.support(methods::POST, std::bind(&RestServer::handle_post, this, std::placeholders::_1));
 	_restListener.support(methods::DEL, std::bind(&RestServer::handle_delete, this, std::placeholders::_1));
 
-	auto task = _restListener.open();
-	task.wait();
+	try
+	{
+		auto task = _restListener.open();
+		task.wait();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 }
 
 RestServer::~RestServer()

@@ -15,7 +15,6 @@ PlatON_OffChain::ReplyProcess& PlatON_OffChain::ReplyProcess::GetInftance()
 {
 	// TODO: 在此处插入 return 语句
 	static ReplyProcess rp;
-	rp.Start();
 
 	return rp;
 }
